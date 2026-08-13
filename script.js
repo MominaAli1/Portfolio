@@ -86,7 +86,7 @@ function renderProjects(filter = 'all') {
     const card = document.createElement('article');
     card.className = 'project-card reveal';
     card.innerHTML = `
-      <div class="project-thumb" style="background:${p.color}">${p.icon}</div>
+      <div class="project-thumb blur-scroll" style="background:${p.color}">${p.icon}</div>
       <div class="project-body">
         <h3>${p.title}</h3>
         <p>${p.description}</p>
@@ -110,6 +110,7 @@ document.getElementById('filters').addEventListener('click', (e) => {
   document.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
   btn.classList.add('active');
   renderProjects(btn.dataset.filter);
+  if (typeof setupBlur === 'function') setupBlur(); // re-bind blur to the new cards
 });
 
 /* ---------- Render skills ---------- */
@@ -276,9 +277,115 @@ document.getElementById('backToTop').addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
+/* ---------- Smooth scroll + scroll-linked blur ---------- */
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const hasGSAP = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+const hasLenis = typeof Lenis !== 'undefined';
+
+let lenis = null;
+
+function initSmoothScroll() {
+  if (prefersReducedMotion || !hasLenis) return;
+
+  lenis = new Lenis({ duration: 1.2, smoothWheel: true });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+  // Make anchor links work with Lenis
+  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        lenis.scrollTo(target, { offset: -68 });
+      }
+    });
+  });
+
+  if (hasGSAP) lenis.on('scroll', ScrollTrigger.update);
+}
+
+/* Blur farther from viewport center. Two engines: GSAP (smoothest) or vanilla fallback. */
+const MAX_BLUR = 12;   // px
+const MAX_SCALE = 0.1; // extra zoom at max blur
+let vanillaBlurBound = false;
+
+function setupBlur() {
+  if (prefersReducedMotion) return;
+
+  if (hasGSAP) {
+    gsap.registerPlugin(ScrollTrigger);
+    // Remove triggers from a previous render (e.g. after filtering projects)
+    ScrollTrigger.getAll().forEach((t) => {
+      if (t.vars && t.vars.id === 'blur') t.kill();
+    });
+
+    gsap.utils.toArray('.blur-scroll').forEach((el) => {
+      // Blur in as it rises from the bottom, sharp at center, blur back out toward the top.
+      gsap.fromTo(
+        el,
+        { filter: `blur(${MAX_BLUR}px)`, scale: 1 + MAX_SCALE },
+        {
+          filter: 'blur(0px)',
+          scale: 1,
+          ease: 'none',
+          scrollTrigger: { id: 'blur', trigger: el, start: 'top bottom', end: 'center center', scrub: true },
+        }
+      );
+      gsap.fromTo(
+        el,
+        { filter: 'blur(0px)', scale: 1 },
+        {
+          filter: `blur(${MAX_BLUR}px)`,
+          scale: 1 + MAX_SCALE,
+          ease: 'none',
+          scrollTrigger: { id: 'blur', trigger: el, start: 'center center', end: 'bottom top', scrub: true },
+        }
+      );
+    });
+    ScrollTrigger.refresh();
+    return;
+  }
+
+  // Vanilla fallback (no libraries): compute blur from distance to viewport center.
+  document.documentElement.classList.add('no-gsap');
+
+  const update = () => {
+    const center = window.innerHeight / 2;
+    document.querySelectorAll('.blur-scroll').forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      const elCenter = rect.top + rect.height / 2;
+      const dist = Math.min(1, Math.abs(elCenter - center) / center);
+      el.style.filter = `blur(${(dist * MAX_BLUR).toFixed(2)}px)`;
+      el.style.transform = `scale(${1 + dist * MAX_SCALE})`;
+    });
+    vanillaBlurTicking = false;
+  };
+
+  if (!vanillaBlurBound) {
+    const onScroll = () => {
+      if (!vanillaBlurTicking) {
+        requestAnimationFrame(update);
+        vanillaBlurTicking = true;
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    vanillaBlurBound = true;
+  }
+  update(); // paint immediately for the current (and any new) elements
+}
+let vanillaBlurTicking = false;
+
 /* ---------- Init ---------- */
 renderProjects();
 observeReveals();
+initSmoothScroll();
+setupBlur();
 
 // Reveal hero content immediately
 document.querySelectorAll('.hero-inner > *').forEach((el, i) => {
