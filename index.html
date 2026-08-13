@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Personal portfolio of Your Name — developer, designer, and builder." />
+  <title>Your Name — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="logo">YN<span>.</span></a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="theme-icon">🌙</span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero section" id="home">
+    <div class="container hero-inner">
+      <p class="hero-eyebrow">👋 Hi, my name is</p>
+      <h1 class="hero-title">Your Name</h1>
+      <h2 class="hero-subtitle">I build things for the web.</h2>
+      <p class="hero-text">
+        I'm a software developer specializing in creating fast, accessible, and
+        beautiful digital experiences. Currently focused on building great products.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View my work</a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      </div>
+      <div class="hero-socials">
+        <a href="#" aria-label="GitHub" target="_blank" rel="noopener">GitHub</a>
+        <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="#" aria-label="Twitter" target="_blank" rel="noopener">Twitter</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section about" id="about">
+    <div class="container">
+      <h2 class="section-title"><span class="section-num">01.</span> About Me</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            Hello! I'm Your Name, a developer who enjoys turning ideas into
+            real, usable products. My journey started when I built my first
+            website, and I've been hooked on creating for the web ever since.
+          </p>
+          <p>
+            I've had the opportunity to work across the stack — from crafting
+            pixel-perfect interfaces to designing robust back-end systems. I care
+            deeply about clean code, good design, and solving real problems.
+          </p>
+          <p>Here are a few technologies I've been working with recently:</p>
+          <ul class="about-list">
+            <li>JavaScript (ES6+)</li>
+            <li>React</li>
+            <li>Node.js</li>
+            <li>HTML &amp; CSS</li>
+            <li>TypeScript</li>
+            <li>Git</li>
+          </ul>
+        </div>
+        <div class="about-card">
+          <div class="about-avatar">YN</div>
+          <div class="about-stats">
+            <div class="stat"><strong data-count="25">0</strong><span>Projects</span></div>
+            <div class="stat"><strong data-count="3">0</strong><span>Years</span></div>
+            <div class="stat"><strong data-count="15">0</strong><span>Clients</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section class="section projects" id="projects">
+    <div class="container">
+      <h2 class="section-title"><span class="section-num">02.</span> Projects</h2>
+
+      <div class="filters" id="filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="web">Web</button>
+        <button class="filter-btn" data-filter="app">Apps</button>
+        <button class="filter-btn" data-filter="design">Design</button>
+      </div>
+
+      <div class="projects-grid" id="projectsGrid">
+        <!-- Cards injected by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="section skills" id="skills">
+    <div class="container">
+      <h2 class="section-title"><span class="section-num">03.</span> Skills</h2>
+      <div class="skills-grid" id="skillsGrid">
+        <!-- Skill bars injected by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section contact" id="contact">
+    <div class="container contact-inner">
+      <h2 class="section-title centered"><span class="section-num">04.</span> Get In Touch</h2>
+      <p class="contact-text">
+        I'm currently open to new opportunities and collaborations. Whether you
+        have a question or just want to say hi, my inbox is always open!
+      </p>
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Jane Doe" required />
+            <span class="error-msg" data-for="name"></span>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="jane@example.com" required />
+            <span class="error-msg" data-for="email"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Say hello..." required></textarea>
+          <span class="error-msg" data-for="message"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+        <p class="form-status" id="formStatus"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>Designed &amp; built by Your Name</p>
+      <button class="back-to-top" id="backToTop" aria-label="Back to top">↑ Top</button>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
