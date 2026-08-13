@@ -36,25 +36,34 @@
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="hero section" id="home">
-    <div class="hero-bg" aria-hidden="true"></div>
-    <div class="container hero-inner">
-      <p class="hero-eyebrow">👋 Hi, my name is</p>
-      <h1 class="hero-title">Momina Ali</h1>
-      <h2 class="hero-subtitle">I build things for the web.</h2>
-      <p class="hero-text">
-        I'm a software developer specializing in creating fast, accessible, and
-        beautiful digital experiences. Currently focused on building great products.
-      </p>
-      <div class="hero-cta">
-        <a href="#projects" class="btn btn-primary">View my work</a>
-        <a href="#contact" class="btn btn-ghost">Get in touch</a>
-      </div>
-      <div class="hero-socials">
-        <a href="#" aria-label="GitHub" target="_blank" rel="noopener">GitHub</a>
-        <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="#" aria-label="Twitter" target="_blank" rel="noopener">Twitter</a>
+  <!-- Hero — pinned; scroll cross-fades wireframe → clay → final render -->
+  <section class="hero" id="home">
+    <div class="hero-track" id="heroTrack">
+      <div class="hero-sticky">
+        <div class="hero-bg" aria-hidden="true">
+          <div class="hero-layer" style="background-image:url('images/hero.jpeg')"></div>
+          <div class="hero-layer" style="background-image:url('images/flower-grey.jpeg')"></div>
+          <div class="hero-layer" style="background-image:url('images/flower-pink.jpeg')"></div>
+        </div>
+        <div class="container hero-inner">
+          <p class="hero-eyebrow">👋 Hi, my name is</p>
+          <h1 class="hero-title">Momina Ali</h1>
+          <h2 class="hero-subtitle">3D Artist &amp; Creative Developer</h2>
+          <p class="hero-text">
+            I sculpt, render, and animate — turning ideas into detailed 3D worlds,
+            and building the web experiences that show them off.
+          </p>
+          <div class="hero-cta">
+            <a href="#projects" class="btn btn-primary">View my work</a>
+            <a href="#contact" class="btn btn-ghost">Get in touch</a>
+          </div>
+          <div class="hero-socials">
+            <a href="#" aria-label="GitHub" target="_blank" rel="noopener">GitHub</a>
+            <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="#" aria-label="Twitter" target="_blank" rel="noopener">Twitter</a>
+          </div>
+        </div>
+        <p class="hero-stage-hint" id="heroHint">Wireframe</p>
       </div>
     </div>
   </section>

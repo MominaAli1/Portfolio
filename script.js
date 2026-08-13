@@ -545,6 +545,29 @@ function driveShowcase() {
   dots.forEach((d, i) => d.classList.toggle('active', i === active));
 }
 
+/* ---------- Pinned hero: wireframe → clay → render cross-fade ---------- */
+const heroTrack = document.getElementById('heroTrack');
+const heroLayers = document.querySelectorAll('.hero-layer');
+const heroHint = document.getElementById('heroHint');
+const HERO_STAGES = ['Wireframe', 'Clay Sculpt', 'Final Render'];
+
+function driveHero() {
+  if (!heroTrack || !heroLayers.length) return;
+  const total = heroTrack.offsetHeight - window.innerHeight;
+  // Hero starts at document top, so scrollY maps directly to progress.
+  const progress = Math.min(1, Math.max(0, window.scrollY / total));
+  const pos = progress * (heroLayers.length - 1); // 0 → 2 across the three renders
+
+  heroLayers.forEach((layer, i) => {
+    const dist = Math.abs(i - pos);
+    layer.style.opacity = Math.max(0, 1 - dist); // cross-fade neighbours
+    // Gentle push-in as each stage becomes active.
+    layer.style.transform = `scale(${1.04 - Math.min(0.04, (1 - Math.min(1, dist)) * 0.04)})`;
+  });
+
+  if (heroHint) heroHint.textContent = HERO_STAGES[Math.round(pos)];
+}
+
 /* ---------- Init ---------- */
 renderProjects();
 renderShowcase();
@@ -552,13 +575,15 @@ observeReveals();
 initSmoothScroll();
 setupBlur();
 driveShowcase();
+driveHero();
 
-// Drive the showcase every scroll frame (works with native scroll and Lenis).
+// Drive scroll-linked sections every frame (works with native scroll and Lenis).
 let showcaseTicking = false;
 function onShowcaseScroll() {
   if (!showcaseTicking) {
     requestAnimationFrame(() => {
       driveShowcase();
+      driveHero();
       showcaseTicking = false;
     });
     showcaseTicking = true;
@@ -568,6 +593,7 @@ window.addEventListener('scroll', onShowcaseScroll, { passive: true });
 window.addEventListener('resize', () => {
   renderShowcase(); // recompute track height on resize
   driveShowcase();
+  driveHero();
 });
 if (lenis) lenis.on('scroll', onShowcaseScroll);
 
