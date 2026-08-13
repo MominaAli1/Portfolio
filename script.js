@@ -5,6 +5,24 @@
 /* ---------- Data ---------- */
 const projects = [
   {
+    title: 'RAG Knowledge Assistant',
+    description: 'An n8n AI agent that ingests documents from Google Drive, embeds them into a Supabase vector store, and answers questions with a Groq LLM — using Cohere reranking for accurate, source-grounded replies.',
+    tags: ['n8n', 'RAG', 'Supabase', 'Groq', 'Cohere'],
+    category: 'ai',
+    image: 'images/ai-rag.png',
+    demo: '#',
+    code: '#',
+  },
+  {
+    title: 'AI Email & Calendar Assistant',
+    description: 'A conversational n8n agent (Groq + memory) that reads your Gmail and creates Google Calendar events on command — a hands-free assistant for your inbox and schedule.',
+    tags: ['n8n', 'AI Agent', 'Gmail', 'Google Calendar'],
+    category: 'ai',
+    image: 'images/ai-assistant.png',
+    demo: '#',
+    code: '#',
+  },
+  {
     title: 'Task Flow',
     description: 'A drag-and-drop task manager with real-time sync and offline support.',
     tags: ['React', 'Node.js', 'WebSocket'],
@@ -126,8 +144,12 @@ function renderProjects(filter = 'all') {
   list.forEach((p) => {
     const card = document.createElement('article');
     card.className = 'project-card reveal';
+    // Use a real screenshot when provided, otherwise the gradient + emoji.
+    const thumb = p.image
+      ? `<div class="project-thumb blur-scroll has-img" style="background-image:url('${p.image}')"></div>`
+      : `<div class="project-thumb blur-scroll" style="background:${p.color}">${p.icon}</div>`;
     card.innerHTML = `
-      <div class="project-thumb blur-scroll" style="background:${p.color}">${p.icon}</div>
+      ${thumb}
       <div class="project-body">
         <h3>${p.title}</h3>
         <p>${p.description}</p>
