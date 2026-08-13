@@ -461,7 +461,8 @@ function renderShowcase() {
     b.addEventListener('click', () => {
       const i = +b.dataset.i;
       const total = showcaseTrack.offsetHeight - window.innerHeight;
-      const y = showcaseTrack.offsetTop + (i / (featured.length - 1)) * total;
+      const trackTop = showcaseTrack.getBoundingClientRect().top + window.scrollY;
+      const y = trackTop + (i / (featured.length - 1)) * total;
       if (lenis) lenis.scrollTo(y);
       else window.scrollTo({ top: y, behavior: 'smooth' });
     });
@@ -477,7 +478,10 @@ function driveShowcase() {
   const dots = dotNodes();
   const n = featured.length;
 
-  const start = showcaseTrack.offsetTop;
+  // Absolute document offset of the track (offsetTop is unreliable because
+  // .showcase is a positioned offset-parent, so it can report 0).
+  const rect = showcaseTrack.getBoundingClientRect();
+  const start = rect.top + window.scrollY;
   const total = showcaseTrack.offsetHeight - window.innerHeight;
   // progress 0 → 1 across the whole pinned track
   const progress = Math.min(1, Math.max(0, (window.scrollY - start) / total));
@@ -501,13 +505,19 @@ function driveShowcase() {
     slide.style.zIndex = String(10 - Math.round(dist));
     slide.style.pointerEvents = opacity > 0.5 ? 'auto' : 'none';
 
-    // Background pushes further (parallax + heavier blur + zoom).
-    bg.style.filter = `blur(${blur}px) brightness(${1 - dist * 0.3})`;
-    bg.style.transform = `scale(${1.1 + dist * 0.18})`;
+    // Direction of travel: <0 = already passed (leaving upward), >0 = still incoming.
+    const dir = i - pos;
 
-    // Foreground content blurs a touch and drifts as it hands off.
-    inner.style.filter = `blur(${Math.min(8, dist * 8)}px)`;
-    inner.style.transform = `translateY(${(i - pos) * 6}%) scale(${1 - dist * 0.05})`;
+    // "Blur outward": the LEAVING slide zooms up + blurs as if rushing past the
+    // viewer; the INCOMING slide eases in from slightly smaller. This directional
+    // scale is what makes the blur read as expanding outward rather than a flat fade.
+    const bgScale = dir <= 0 ? 1.1 + dist * 0.4 : 1.1 - dist * 0.06;
+    bg.style.filter = `blur(${blur}px) brightness(${1 - dist * 0.35})`;
+    bg.style.transform = `scale(${bgScale})`;
+
+    const innerScale = dir <= 0 ? 1 + dist * 0.35 : 1 - dist * 0.08;
+    inner.style.filter = `blur(${Math.min(14, dist * 14)}px)`;
+    inner.style.transform = `scale(${innerScale})`;
   });
 
   dots.forEach((d, i) => d.classList.toggle('active', i === active));
