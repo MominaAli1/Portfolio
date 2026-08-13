@@ -66,6 +66,47 @@ const projects = [
   },
 ];
 
+/* Featured slides for the pinned scroll showcase.
+   bg = full-bleed background image, screen = image shown in the device. */
+const featured = [
+  {
+    num: '01 / CASE 01',
+    title: 'Reducomply — Compliance Platform',
+    tags: ['Product Design', 'Research', 'Design System'],
+    desc: 'Architected an enterprise compliance platform balancing 5 permission tiers — from Super Admin to auditor. Built a scalable design system that eliminated UI fragmentation across 20+ screens.',
+    bg: 'https://picsum.photos/id/180/1600/900',
+    screen: 'https://picsum.photos/id/2/900/700',
+    tint: '#243a6b',
+  },
+  {
+    num: '02 / CASE 02',
+    title: 'Task Flow — Realtime Workspace',
+    tags: ['Product Design', 'Frontend', 'Motion'],
+    desc: 'A drag-and-drop workspace with realtime sync and offline support. Designed the interaction model and shipped a fluid, latency-hiding UI that feels instant even on flaky networks.',
+    bg: 'https://picsum.photos/id/48/1600/900',
+    screen: 'https://picsum.photos/id/20/900/700',
+    tint: '#0b6b5f',
+  },
+  {
+    num: '03 / CASE 03',
+    title: 'The Healing Dawn — UI Redesign',
+    tags: ['UI Design', 'Visual Design', 'Wellness'],
+    desc: 'Scaled a creative concept into a production visual language. Designed responsive layouts, a typography scale, and component states for high-converting wellness landing pages.',
+    bg: 'https://picsum.photos/id/152/1600/900',
+    screen: 'https://picsum.photos/id/64/900/700',
+    tint: '#6b2d4a',
+  },
+  {
+    num: '04 / CASE 04',
+    title: 'Fit Tracker — Mobile Analytics',
+    tags: ['Mobile', 'Data Viz', 'Prototyping'],
+    desc: 'A mobile-first workout logger with progress charts and goal streaks. Ran user research, built interactive prototypes, and handed off production-ready specs to engineering.',
+    bg: 'https://picsum.photos/id/119/1600/900',
+    screen: 'https://picsum.photos/id/26/900/700',
+    tint: '#7a5a1e',
+  },
+];
+
 const skills = [
   { name: 'JavaScript / TypeScript', level: 92 },
   { name: 'React & Next.js', level: 88 },
@@ -381,11 +422,122 @@ function setupBlur() {
 }
 let vanillaBlurTicking = false;
 
+/* ---------- Pinned scroll showcase ---------- */
+const showcaseTrack = document.getElementById('showcaseTrack');
+const slidesEl = document.getElementById('slides');
+const dotsEl = document.getElementById('showcaseDots');
+
+function renderShowcase() {
+  // Track height: one viewport of scrolling per slide.
+  showcaseTrack.style.height = featured.length * 100 + 'vh';
+
+  slidesEl.innerHTML = featured
+    .map(
+      (f) => `
+      <div class="slide">
+        <div class="slide-bg" style="background-color:${f.tint};background-image:url('${f.bg}')"></div>
+        <div class="slide-inner">
+          <div class="slide-left">
+            <span class="slide-num">${f.num}</span>
+            <h3>${f.title}</h3>
+            <div class="slide-tags">${f.tags.map((t) => `<span>${t}</span>`).join('')}</div>
+          </div>
+          <div class="slide-device" style="background-color:${f.tint};background-image:url('${f.screen}')"></div>
+          <div class="slide-right">
+            <p>${f.desc}</p>
+            <a href="#projects">Explore Case Study →</a>
+          </div>
+        </div>
+      </div>`
+    )
+    .join('');
+
+  dotsEl.innerHTML = featured
+    .map((_, i) => `<button data-i="${i}" aria-label="Go to slide ${i + 1}"></button>`)
+    .join('');
+
+  // Click a dot to jump to that slide's scroll position.
+  dotsEl.querySelectorAll('button').forEach((b) => {
+    b.addEventListener('click', () => {
+      const i = +b.dataset.i;
+      const total = showcaseTrack.offsetHeight - window.innerHeight;
+      const y = showcaseTrack.offsetTop + (i / (featured.length - 1)) * total;
+      if (lenis) lenis.scrollTo(y);
+      else window.scrollTo({ top: y, behavior: 'smooth' });
+    });
+  });
+}
+
+const slideNodes = () => slidesEl.querySelectorAll('.slide');
+const dotNodes = () => dotsEl.querySelectorAll('button');
+
+function driveShowcase() {
+  if (!showcaseTrack) return;
+  const slides = slideNodes();
+  const dots = dotNodes();
+  const n = featured.length;
+
+  const start = showcaseTrack.offsetTop;
+  const total = showcaseTrack.offsetHeight - window.innerHeight;
+  // progress 0 → 1 across the whole pinned track
+  const progress = Math.min(1, Math.max(0, (window.scrollY - start) / total));
+  const pos = progress * (n - 1); // fractional slide position
+  const active = Math.round(pos);
+
+  slides.forEach((slide, i) => {
+    const dist = Math.abs(i - pos); // 0 when centered, grows as it leaves
+    const bg = slide.querySelector('.slide-bg');
+    const inner = slide.querySelector('.slide-inner');
+
+    if (prefersReducedMotion) {
+      slide.style.opacity = dist < 0.5 ? 1 : 0;
+      return;
+    }
+
+    // The signature move: sharp & solid when centered, blur + scale OUT as it leaves.
+    const opacity = Math.max(0, 1 - dist);
+    const blur = Math.min(18, dist * 18);
+    slide.style.opacity = opacity;
+    slide.style.zIndex = String(10 - Math.round(dist));
+    slide.style.pointerEvents = opacity > 0.5 ? 'auto' : 'none';
+
+    // Background pushes further (parallax + heavier blur + zoom).
+    bg.style.filter = `blur(${blur}px) brightness(${1 - dist * 0.3})`;
+    bg.style.transform = `scale(${1.1 + dist * 0.18})`;
+
+    // Foreground content blurs a touch and drifts as it hands off.
+    inner.style.filter = `blur(${Math.min(8, dist * 8)}px)`;
+    inner.style.transform = `translateY(${(i - pos) * 6}%) scale(${1 - dist * 0.05})`;
+  });
+
+  dots.forEach((d, i) => d.classList.toggle('active', i === active));
+}
+
 /* ---------- Init ---------- */
 renderProjects();
+renderShowcase();
 observeReveals();
 initSmoothScroll();
 setupBlur();
+driveShowcase();
+
+// Drive the showcase every scroll frame (works with native scroll and Lenis).
+let showcaseTicking = false;
+function onShowcaseScroll() {
+  if (!showcaseTicking) {
+    requestAnimationFrame(() => {
+      driveShowcase();
+      showcaseTicking = false;
+    });
+    showcaseTicking = true;
+  }
+}
+window.addEventListener('scroll', onShowcaseScroll, { passive: true });
+window.addEventListener('resize', () => {
+  renderShowcase(); // recompute track height on resize
+  driveShowcase();
+});
+if (lenis) lenis.on('scroll', onShowcaseScroll);
 
 // Reveal hero content immediately
 document.querySelectorAll('.hero-inner > *').forEach((el, i) => {
