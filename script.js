@@ -521,6 +521,7 @@ function driveShowcase() {
 const heroTrack = document.getElementById('heroTrack');
 const heroLayers = document.querySelectorAll('.card-layer');
 const cardStage = document.getElementById('cardStage');
+const polaPhotos = document.querySelectorAll('.polaroid-photo');
 const HERO_STAGES = ['WIREFRAME', 'CLAY SCULPT', 'FINAL RENDER'];
 
 function driveHero() {
@@ -533,6 +534,16 @@ function driveHero() {
   heroLayers.forEach((layer, i) => {
     const dist = Math.abs(i - pos);
     layer.style.opacity = Math.max(0, 1 - dist); // cross-fade neighbours
+  });
+
+  // Polaroids swap from the wireframe set to the clay set as the flower morphs.
+  const t = Math.min(1, pos); // 0 at wireframe → 1 once at clay (stays through pink)
+  polaPhotos.forEach((ph) => {
+    const layers = ph.children;
+    if (layers.length >= 2) {
+      layers[0].style.opacity = 1 - t;
+      layers[1].style.opacity = t;
+    }
   });
 
   if (cardStage) cardStage.textContent = HERO_STAGES[Math.round(pos)];
