@@ -239,6 +239,35 @@ ul { list-style: none; }
 }
 .hello-bio { font-size: 1rem; line-height: 1.9; color: #443a29; }
 
+/* ---------- AI Automation ---------- */
+.ai-section {
+  background: #e5f2da; color: #26301e; font-family: 'Space Mono', monospace;
+  padding: 110px 0;
+}
+.ai-inner { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+.ai-eyebrow { letter-spacing: 3px; color: #5a6b4e; margin-bottom: 14px; font-size: 0.85rem; }
+.ai-eyebrow b { color: #26301e; font-size: 1.1rem; }
+.ai-title { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; letter-spacing: 1px; margin-bottom: 12px; }
+.ai-sub { color: #55604c; max-width: 640px; margin-bottom: 46px; line-height: 1.7; font-size: 0.95rem; }
+.ai-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+.ai-card {
+  background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 14px; overflow: hidden;
+  box-shadow: 0 20px 44px -26px rgba(20,30,10,0.5); display: flex; flex-direction: column;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.ai-card:hover { transform: translateY(-6px); box-shadow: 0 30px 54px -26px rgba(20,30,10,0.6); }
+.ai-shot { background: #0d1117; line-height: 0; }
+.ai-shot img { width: 100%; height: auto; display: block; }
+.ai-body { padding: 24px; }
+.ai-body h3 { font-size: 1.15rem; letter-spacing: 0.3px; margin-bottom: 10px; }
+.ai-body p { font-family: 'Inter', sans-serif; color: #4a4a4a; font-size: 0.92rem; line-height: 1.7; margin-bottom: 16px; }
+.ai-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.ai-tags span {
+  font-size: 0.72rem; letter-spacing: 0.5px; background: #eef3e8; color: #3f5233;
+  border: 1px solid rgba(0,0,0,0.08); padding: 5px 11px; border-radius: 20px;
+}
+@media (max-width: 820px) { .ai-grid { grid-template-columns: 1fr; } }
+
 /* ---------- Projects ---------- */
 .filters { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 34px; }
 .filter-btn {
