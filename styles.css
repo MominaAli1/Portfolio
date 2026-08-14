@@ -172,7 +172,7 @@ ul { list-style: none; }
 .hello-left { align-self: center; }
 .hello-num { letter-spacing: 3px; color: var(--ink-soft); margin-bottom: 26px; }
 .hello-num b { color: var(--ink); font-size: 1.15rem; }
-.hello-name { font-size: 1.5rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 22px; }
+.hello-name { font-family: 'Great Vibes', cursive; font-size: clamp(3rem, 4.4vw, 4rem); font-weight: 400; letter-spacing: 0.5px; line-height: 1; margin-bottom: 20px; }
 .hello-tags { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
 .hello-tags span {
   border: 1px solid rgba(74,63,47,0.35); border-radius: 30px; padding: 8px 16px;
