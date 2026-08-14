@@ -313,7 +313,10 @@ ul { list-style: none; }
   box-shadow: 0 14px 30px -12px rgba(38,48,30,0.6);
 }
 .outro-btn:hover { transform: translateY(-3px); background: #33422a; box-shadow: 0 20px 38px -14px rgba(38,48,30,0.7); }
-.outro-credit { margin-top: 60px; font-size: 0.78rem; letter-spacing: 1px; color: #6a7358; }
+.outro-email { font-family: 'Inter', sans-serif; margin-top: 20px; font-size: 0.95rem; color: #3f4a33; }
+.outro-email a { color: #26301e; font-weight: 700; border-bottom: 2px solid rgba(38,48,30,0.4); transition: border-color var(--transition); }
+.outro-email a:hover { border-color: #26301e; }
+.outro-credit { margin-top: 56px; font-size: 0.78rem; letter-spacing: 1px; color: #6a7358; }
 
 /* ---------- Projects ---------- */
 .filters { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 34px; }
