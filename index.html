@@ -7,7 +7,7 @@
   <title>Momina Ali — Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Great+Vibes&family=Space+Mono:wght@400;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -79,40 +79,54 @@
     </div>
   </section>
 
-  <!-- About -->
-  <section class="section about" id="about">
-    <div class="container">
-      <h2 class="section-title"><span class="section-num">01.</span> About Me</h2>
-      <div class="about-grid">
-        <div class="about-text">
-          <p>
-            Hello! I'm Momina Ali, a developer who enjoys turning ideas into
-            real, usable products. My journey started when I built my first
-            website, and I've been hooked on creating for the web ever since.
-          </p>
-          <p>
-            I've had the opportunity to work across the stack — from crafting
-            pixel-perfect interfaces to designing robust back-end systems. I care
-            deeply about clean code, good design, and solving real problems.
-          </p>
-          <p>Here are a few technologies I've been working with recently:</p>
-          <ul class="about-list">
-            <li>JavaScript (ES6+)</li>
-            <li>React</li>
-            <li>Node.js</li>
-            <li>HTML &amp; CSS</li>
-            <li>TypeScript</li>
-            <li>Git</li>
-          </ul>
+  <!-- About / Hello -->
+  <section class="hello" id="about">
+    <div class="hello-grid">
+      <!-- Left column -->
+      <div class="hello-left reveal">
+        <p class="hello-num"><b>01</b> / HELLO</p>
+        <h2 class="hello-name">MOMINA ALI</h2>
+        <div class="hello-tags">
+          <span>3D ARTIST</span>
+          <span>~2 YEARS EXPERIENCE</span>
+          <span>MODELING · SCULPTING · RENDERING</span>
         </div>
-        <div class="about-card">
-          <div class="about-avatar" style="background-image:url('images/hero.jpeg')"></div>
-          <div class="about-stats">
-            <div class="stat"><strong data-count="25">0</strong><span>Projects</span></div>
-            <div class="stat"><strong data-count="3">0</strong><span>Years</span></div>
-            <div class="stat"><strong data-count="15">0</strong><span>Clients</span></div>
-          </div>
+        <div class="hello-socials">
+          <a href="#" aria-label="LinkedIn">in</a>
+          <a href="#" aria-label="Instagram">◎</a>
         </div>
+      </div>
+
+      <!-- Center: flower card with 4 pinned polaroids -->
+      <div class="hello-center reveal">
+        <div class="flower-card" style="background-image:url('images/flower-pink.jpeg?v=10')"></div>
+
+        <figure class="polaroid p-tl" data-slot="1">
+          <div class="polaroid-photo"></div>
+          <figcaption>this is me</figcaption>
+        </figure>
+        <figure class="polaroid p-tr" data-slot="2">
+          <div class="polaroid-photo"></div>
+          <figcaption>explore</figcaption>
+        </figure>
+        <figure class="polaroid p-bl" data-slot="3">
+          <div class="polaroid-photo"></div>
+          <figcaption>daily fuel ♡</figcaption>
+        </figure>
+        <figure class="polaroid p-br" data-slot="4">
+          <div class="polaroid-photo"></div>
+          <figcaption>where ideas take shape</figcaption>
+        </figure>
+      </div>
+
+      <!-- Right column -->
+      <div class="hello-right reveal">
+        <span class="hello-pill">AVAILABLE FOR ROLES</span>
+        <p class="hello-bio">
+          3D artist specializing in modeling, sculpting, and rendering — turning
+          concepts into detailed, lifelike scenes. I bridge creative direction,
+          look-development, and production-ready delivery.
+        </p>
       </div>
     </div>
   </section>
