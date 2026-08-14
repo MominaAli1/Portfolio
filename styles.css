@@ -65,22 +65,23 @@ ul { list-style: none; }
 /* ---------- Navbar ---------- */
 .navbar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  background: rgba(208, 239, 189, 0.85);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid transparent;
+  font-family: 'Space Mono', monospace;
   transition: border-color var(--transition), box-shadow var(--transition);
 }
-.navbar.scrolled { border-color: var(--border); box-shadow: var(--shadow); }
-.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
-.logo { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.5px; }
+.navbar.scrolled { border-color: rgba(38,48,30,0.12); box-shadow: 0 6px 20px -14px rgba(38,48,30,0.5); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.logo { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.5px; color: #26301e; }
 .logo span { color: var(--accent); }
 .nav-links { display: flex; gap: 28px; }
-.nav-link { font-size: 0.95rem; font-weight: 500; color: var(--text-muted); position: relative; transition: color var(--transition); }
+.nav-link { font-size: 0.9rem; font-weight: 500; color: #4a5540; position: relative; transition: color var(--transition); }
 .nav-link::after {
   content: ''; position: absolute; left: 0; bottom: -6px; height: 2px; width: 0;
   background: var(--accent); transition: width var(--transition);
 }
-.nav-link:hover, .nav-link.active { color: var(--text); }
+.nav-link:hover, .nav-link.active { color: #26301e; }
 .nav-link:hover::after, .nav-link.active::after { width: 100%; }
 
 .nav-actions { display: flex; align-items: center; gap: 14px; }
@@ -158,12 +159,13 @@ ul { list-style: none; }
 /* Pinned track: scrolling drives the flower card morph while the frame stays put */
 .hello-track { height: 300vh; }
 .hello-sticky {
-  position: sticky; top: 0; min-height: 100vh; display: flex; align-items: center;
-  padding: 92px 0 40px;
+  position: sticky; top: 0; min-height: 100vh; height: 100vh; display: flex; align-items: center; justify-content: center;
+  padding: 64px 0 20px; overflow: hidden;
 }
 .hello-grid {
   width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 32px;
-  display: grid; grid-template-columns: 1fr minmax(420px, 560px) 1fr; gap: 30px; align-items: center;
+  display: grid; grid-template-columns: 1fr minmax(380px, 500px) 1fr; gap: 26px; align-items: center;
+  transform: scale(0.86); transform-origin: center center;
 }
 
 /* Left column */

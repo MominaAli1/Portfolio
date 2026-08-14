@@ -193,25 +193,8 @@ if (skillsGrid) {
   });
 }
 
-/* ---------- Theme toggle ---------- */
-const themeToggle = document.getElementById('themeToggle');
-const themeIcon = themeToggle.querySelector('.theme-icon');
-
-function applyTheme(theme) {
-  document.documentElement.setAttribute('data-theme', theme);
-  themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
-  localStorage.setItem('theme', theme);
-}
-
-const savedTheme =
-  localStorage.getItem('theme') ||
-  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-applyTheme(savedTheme);
-
-themeToggle.addEventListener('click', () => {
-  const current = document.documentElement.getAttribute('data-theme');
-  applyTheme(current === 'dark' ? 'light' : 'dark');
-});
+/* ---------- Fixed light palette (design uses a single green theme) ---------- */
+document.documentElement.setAttribute('data-theme', 'light');
 
 /* ---------- Mobile nav ---------- */
 const hamburger = document.getElementById('hamburger');
