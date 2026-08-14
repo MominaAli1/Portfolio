@@ -151,7 +151,7 @@ ul { list-style: none; }
 /* ---------- About / Hello (flower + polaroids) ---------- */
 .hello {
   --ink: #4a3f2f; --ink-soft: #6f6552; --paper: #fbf3e0; --tape: rgba(197,168,110,0.5);
-  background: linear-gradient(160deg, #f6e8c9 0%, #f3dfb6 55%, #efd6a4 100%);
+  background: #D0EFBD;
   color: var(--ink); font-family: 'Space Mono', monospace;
   position: relative;
 }
