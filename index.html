@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Personal portfolio of Momina Ali — developer, designer, and builder." />
+  <title>Momina Ali — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Great+Vibes&family=Space+Mono:wght@400;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=6" />
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="logo">MA<span>.</span></a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#ai-automation" class="nav-link">AI Automation</a>
+        <a href="#modelling" class="nav-link">3D Modelling</a>
+        <a href="#connect" class="nav-link">Connect</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="theme-icon">🌙</span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero: Hello — flower card morphs wireframe → clay → pink on scroll -->
+  <section class="hello" id="home">
+    <div class="hello-track" id="heroTrack">
+      <div class="hello-sticky">
+        <div class="hello-grid">
+          <!-- Left column -->
+          <div class="hello-left reveal">
+            <p class="hello-num"><b>01</b> / HELLO</p>
+            <h2 class="hello-name">MOMINA ALI</h2>
+            <div class="hello-tags">
+              <span>3D ARTIST</span>
+              <span>AI AUTOMATION</span>
+              <span>~2 YEARS EXPERIENCE</span>
+              <span>MODELING · SCULPTING · RENDERING</span>
+            </div>
+            <div class="hello-socials">
+              <a href="#" aria-label="LinkedIn">in</a>
+              <a href="#" aria-label="Instagram">◎</a>
+            </div>
+          </div>
+
+          <!-- Center: flower card (morphs on scroll) + 4 pinned polaroids -->
+          <div class="hello-center reveal">
+            <div class="flower-card">
+              <div class="card-layer" style="background-image:url('images/hero.jpeg?v=10')"></div>
+              <div class="card-layer" style="background-image:url('images/flower-grey.jpeg?v=10')"></div>
+              <div class="card-layer" style="background-image:url('images/flower-pink.jpeg?v=10')"></div>
+              <span class="card-stage" id="cardStage">WIREFRAME</span>
+            </div>
+
+            <figure class="polaroid p-tl">
+              <div class="polaroid-photo">
+                <div class="pola-layer" style="background-image:url('images/photo-tl.jpeg')"></div>
+                <div class="pola-layer" style="background-image:url('images/gphoto-tl.jpeg')"></div>
+                <div class="pola-layer" style="background-image:url('images/pphoto-tl.jpeg')"></div>
+              </div>
+            </figure>
+            <figure class="polaroid p-tr">
+              <div class="polaroid-photo">
+                <div class="pola-layer" style="background-image:url('images/photo-tr.jpeg')"></div>
+                <div class="pola-layer" style="background-image:url('images/gphoto-tr.jpeg')"></div>
+                <div class="pola-layer" style="background-image:url('images/pphoto-tr.jpeg')"></div>
+              </div>
+            </figure>
+            <figure class="polaroid p-bl">
+              <div class="polaroid-photo">
+                <div class="pola-layer" style="background-image:url('images/photo-bl.jpeg')"></div>
+                <div class="pola-layer" style="background-image:url('images/gphoto-bl.jpeg')"></div>
+                <div class="pola-layer" style="background-image:url('images/pphoto-bl.jpeg')"></div>
+              </div>
+            </figure>
+            <figure class="polaroid p-br">
+              <div class="polaroid-photo">
+                <div class="pola-layer" style="background-image:url('images/photo-br.jpeg')"></div>
+                <div class="pola-layer" style="background-image:url('images/gphoto-br.jpeg')"></div>
+                <div class="pola-layer" style="background-image:url('images/pphoto-br.jpeg')"></div>
+              </div>
+            </figure>
+          </div>
+
+          <!-- Right column -->
+          <div class="hello-right reveal">
+            <span class="hello-pill">AVAILABLE FOR ROLES</span>
+            <p class="hello-bio">
+              A Computer Science student exploring stuff! I've worked in creative
+              and AI — happy to see you here!
+            </p>
+            <p class="hello-scrollhint">scroll to watch it come alive ↓</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Automation -->
+  <section class="ai-section" id="ai-automation">
+    <div class="ai-inner">
+      <p class="ai-eyebrow"><b>02</b> / AI AUTOMATION</p>
+      <h2 class="ai-title">AI AUTOMATION</h2>
+      <p class="ai-sub">Intelligent n8n workflows that wire LLMs to real tools — retrieval, memory, email, and calendars.</p>
+
+      <div class="ai-grid">
+        <article class="ai-card reveal">
+          <div class="ai-shot"><img src="images/ai-rag.png" alt="n8n RAG knowledge assistant workflow" loading="lazy" /></div>
+          <div class="ai-body">
+            <h3>RAG Knowledge Assistant</h3>
+            <p>An n8n AI agent that ingests documents from Google Drive, embeds them into a Supabase vector store, and answers questions with a Groq LLM — using Cohere reranking for accurate, source-grounded replies.</p>
+            <div class="ai-tags"><span>n8n</span><span>RAG</span><span>Supabase</span><span>Groq</span><span>Cohere</span></div>
+          </div>
+        </article>
+
+        <article class="ai-card reveal">
+          <div class="ai-shot"><img src="images/ai-assistant.png" alt="n8n AI email and calendar assistant workflow" loading="lazy" /></div>
+          <div class="ai-body">
+            <h3>AI Email &amp; Calendar Assistant</h3>
+            <p>A conversational n8n agent (Groq + memory) that reads your Gmail and creates Google Calendar events on command — a hands-free assistant for your inbox and schedule.</p>
+            <div class="ai-tags"><span>n8n</span><span>AI Agent</span><span>Gmail</span><span>Google Calendar</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3D Modelling -->
+  <section class="td-section" id="modelling">
+    <div class="td-inner">
+      <p class="td-eyebrow"><b>03</b> / 3D MODELLING</p>
+      <h2 class="td-title">3D MODELLING</h2>
+      <p class="td-sub">Modeling, texturing, lighting and rendering — cinematic CGI crafted in Blender.</p>
+
+      <div class="td-grid">
+        <a class="td-card reveal" href="https://www.behance.net/gallery/197687057/Cinematic-Sword-CGI" target="_blank" rel="noopener">
+          <div class="td-shot"><img src="images/3d-sword.png" alt="Cinematic Sword CGI" loading="lazy" /></div>
+          <div class="td-body">
+            <h3>Cinematic Sword CGI</h3>
+            <p>A hero-lit cinematic sword — modeled, textured, and lit for a dramatic, glowing reveal.</p>
+            <div class="td-tags"><span>Blender</span><span>Lighting</span><span>CGI</span></div>
+            <span class="td-link">View on Behance ↗</span>
+          </div>
+        </a>
+
+        <a class="td-card reveal" href="https://www.behance.net/gallery/197669287/3D-Mecha-Spider" target="_blank" rel="noopener">
+          <div class="td-shot"><img src="images/3d-mecha.png" alt="3D Mecha Spider" loading="lazy" /></div>
+          <div class="td-body">
+            <h3>3D Mecha Spider</h3>
+            <p>A hard-surface robotic spider with metallic materials, intricate joints, and studio lighting.</p>
+            <div class="td-tags"><span>Blender</span><span>Hard-surface</span><span>Modeling</span></div>
+            <span class="td-link">View on Behance ↗</span>
+          </div>
+        </a>
+
+        <a class="td-card reveal" href="https://www.behance.net/gallery/197666611/Donut-3D-Animation" target="_blank" rel="noopener">
+          <div class="td-shot"><img src="images/3d-donut.png" alt="Donut 3D Animation" loading="lazy" /></div>
+          <div class="td-body">
+            <h3>Donut 3D Animation</h3>
+            <p>A classic chocolate donut with sprinkles — texturing, shading, and an animation study.</p>
+            <div class="td-tags"><span>Blender</span><span>Texturing</span><span>Animation</span></div>
+            <span class="td-link">View on Behance ↗</span>
+          </div>
+        </a>
+
+        <article class="td-card reveal">
+          <div class="td-shot"><img src="images/3d-sphere.jpeg" alt="Procedural gold material study" loading="lazy" /></div>
+          <div class="td-body">
+            <h3>Molten Gold — Material Study</h3>
+            <p>A procedural swirled-gold shader — exploring anisotropic reflections and displacement on a studio-lit sphere.</p>
+            <div class="td-tags"><span>Blender</span><span>Shading</span><span>Materials</span></div>
+          </div>
+        </article>
+
+        <article class="td-card reveal">
+          <div class="td-shot"><img src="images/3d-phone.jpeg" alt="Google Pixel 4 product render" loading="lazy" /></div>
+          <div class="td-body">
+            <h3>Pixel 4 — Product Render</h3>
+            <p>A clean hard-surface render of the Pixel 4 in three colourways — realistic glass, metal, and studio lighting.</p>
+            <div class="td-tags"><span>Blender</span><span>Product</span><span>Hard-surface</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Outro / Connect -->
+  <section class="outro" id="connect">
+    <div class="outro-inner reveal">
+      <p class="outro-eyebrow"><b>04</b> / THAT'S A WRAP</p>
+      <h2 class="outro-title">Thanks for scrolling ✿</h2>
+      <p class="outro-text">That's my work so far — let's build something together.</p>
+      <a class="outro-btn" href="https://www.linkedin.com/in/mominaali/" target="_blank" rel="noopener">Check out my LinkedIn ↗</a>
+      <p class="outro-credit">Designed &amp; built by Momina Ali</p>
+    </div>
+  </section>
+
+  <!-- Smooth scroll + scroll animation libraries (optional; JS falls back gracefully if these fail to load) -->
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="script.js?v=4"></script>
+</body>
+</html>
