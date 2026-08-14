@@ -536,13 +536,12 @@ function driveHero() {
     layer.style.opacity = Math.max(0, 1 - dist); // cross-fade neighbours
   });
 
-  // Polaroids swap from the wireframe set to the clay set as the flower morphs.
-  const t = Math.min(1, pos); // 0 at wireframe → 1 once at clay (stays through pink)
+  // Polaroids cross-fade through their three photo sets in step with the flower
+  // (wireframe set → clay set → pink set), same dist-based fade as the card.
   polaPhotos.forEach((ph) => {
     const layers = ph.children;
-    if (layers.length >= 2) {
-      layers[0].style.opacity = 1 - t;
-      layers[1].style.opacity = t;
+    for (let i = 0; i < layers.length; i++) {
+      layers[i].style.opacity = Math.max(0, 1 - Math.abs(i - pos));
     }
   });
 
