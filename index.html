@@ -19,7 +19,6 @@
       <nav class="nav-links" id="navLinks">
         <a href="#home" class="nav-link">Home</a>
         <a href="#featured" class="nav-link">Featured</a>
-        <a href="#about" class="nav-link">About</a>
         <a href="#projects" class="nav-link">Projects</a>
         <a href="#skills" class="nav-link">Skills</a>
         <a href="#contact" class="nav-link">Contact</a>
@@ -36,34 +35,64 @@
     </div>
   </header>
 
-  <!-- Hero — pinned; scroll cross-fades wireframe → clay → final render -->
-  <section class="hero" id="home">
-    <div class="hero-track" id="heroTrack">
-      <div class="hero-sticky">
-        <div class="hero-bg" aria-hidden="true">
-          <div class="hero-layer" style="background-image:url('images/hero.jpeg?v=10')"></div>
-          <div class="hero-layer" style="background-image:url('images/flower-grey.jpeg?v=10')"></div>
-          <div class="hero-layer" style="background-image:url('images/flower-pink.jpeg?v=10')"></div>
-        </div>
-        <div class="container hero-inner">
-          <p class="hero-eyebrow">👋 Hi, my name is</p>
-          <h1 class="hero-title">Momina Ali</h1>
-          <h2 class="hero-subtitle">3D Artist &amp; Creative Developer</h2>
-          <p class="hero-text">
-            I sculpt, render, and animate — turning ideas into detailed 3D worlds,
-            and building the web experiences that show them off.
-          </p>
-          <div class="hero-cta">
-            <a href="#projects" class="btn btn-primary">View my work</a>
-            <a href="#contact" class="btn btn-ghost">Get in touch</a>
+  <!-- Hero: Hello — flower card morphs wireframe → clay → pink on scroll -->
+  <section class="hello" id="home">
+    <div class="hello-track" id="heroTrack">
+      <div class="hello-sticky">
+        <div class="hello-grid">
+          <!-- Left column -->
+          <div class="hello-left reveal">
+            <p class="hello-num"><b>01</b> / HELLO</p>
+            <h2 class="hello-name">MOMINA ALI</h2>
+            <div class="hello-tags">
+              <span>3D ARTIST</span>
+              <span>~2 YEARS EXPERIENCE</span>
+              <span>MODELING · SCULPTING · RENDERING</span>
+            </div>
+            <div class="hello-socials">
+              <a href="#" aria-label="LinkedIn">in</a>
+              <a href="#" aria-label="Instagram">◎</a>
+            </div>
           </div>
-          <div class="hero-socials">
-            <a href="#" aria-label="GitHub" target="_blank" rel="noopener">GitHub</a>
-            <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener">LinkedIn</a>
-            <a href="#" aria-label="Twitter" target="_blank" rel="noopener">Twitter</a>
+
+          <!-- Center: flower card (morphs on scroll) + 4 pinned polaroids -->
+          <div class="hello-center reveal">
+            <div class="flower-card">
+              <div class="card-layer" style="background-image:url('images/hero.jpeg?v=10')"></div>
+              <div class="card-layer" style="background-image:url('images/flower-grey.jpeg?v=10')"></div>
+              <div class="card-layer" style="background-image:url('images/flower-pink.jpeg?v=10')"></div>
+              <span class="card-stage" id="cardStage">WIREFRAME</span>
+            </div>
+
+            <figure class="polaroid p-tl" data-slot="1">
+              <div class="polaroid-photo"></div>
+              <figcaption>this is me</figcaption>
+            </figure>
+            <figure class="polaroid p-tr" data-slot="2">
+              <div class="polaroid-photo"></div>
+              <figcaption>explore</figcaption>
+            </figure>
+            <figure class="polaroid p-bl" data-slot="3">
+              <div class="polaroid-photo"></div>
+              <figcaption>daily fuel ♡</figcaption>
+            </figure>
+            <figure class="polaroid p-br" data-slot="4">
+              <div class="polaroid-photo"></div>
+              <figcaption>where ideas take shape</figcaption>
+            </figure>
+          </div>
+
+          <!-- Right column -->
+          <div class="hello-right reveal">
+            <span class="hello-pill">AVAILABLE FOR ROLES</span>
+            <p class="hello-bio">
+              3D artist specializing in modeling, sculpting, and rendering — turning
+              concepts into detailed, lifelike scenes. I bridge creative direction,
+              look-development, and production-ready delivery.
+            </p>
+            <p class="hello-scrollhint">scroll to watch it come alive ↓</p>
           </div>
         </div>
-        <p class="hero-stage-hint" id="heroHint">Wireframe</p>
       </div>
     </div>
   </section>
@@ -75,58 +104,6 @@
         <p class="showcase-label">Selected Work — scroll to explore</p>
         <div class="slides" id="slides"><!-- injected by JS --></div>
         <div class="showcase-dots" id="showcaseDots"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About / Hello -->
-  <section class="hello" id="about">
-    <div class="hello-grid">
-      <!-- Left column -->
-      <div class="hello-left reveal">
-        <p class="hello-num"><b>01</b> / HELLO</p>
-        <h2 class="hello-name">MOMINA ALI</h2>
-        <div class="hello-tags">
-          <span>3D ARTIST</span>
-          <span>~2 YEARS EXPERIENCE</span>
-          <span>MODELING · SCULPTING · RENDERING</span>
-        </div>
-        <div class="hello-socials">
-          <a href="#" aria-label="LinkedIn">in</a>
-          <a href="#" aria-label="Instagram">◎</a>
-        </div>
-      </div>
-
-      <!-- Center: flower card with 4 pinned polaroids -->
-      <div class="hello-center reveal">
-        <div class="flower-card" style="background-image:url('images/flower-pink.jpeg?v=10')"></div>
-
-        <figure class="polaroid p-tl" data-slot="1">
-          <div class="polaroid-photo"></div>
-          <figcaption>this is me</figcaption>
-        </figure>
-        <figure class="polaroid p-tr" data-slot="2">
-          <div class="polaroid-photo"></div>
-          <figcaption>explore</figcaption>
-        </figure>
-        <figure class="polaroid p-bl" data-slot="3">
-          <div class="polaroid-photo"></div>
-          <figcaption>daily fuel ♡</figcaption>
-        </figure>
-        <figure class="polaroid p-br" data-slot="4">
-          <div class="polaroid-photo"></div>
-          <figcaption>where ideas take shape</figcaption>
-        </figure>
-      </div>
-
-      <!-- Right column -->
-      <div class="hello-right reveal">
-        <span class="hello-pill">AVAILABLE FOR ROLES</span>
-        <p class="hello-bio">
-          3D artist specializing in modeling, sculpting, and rendering — turning
-          concepts into detailed, lifelike scenes. I bridge creative direction,
-          look-development, and production-ready delivery.
-        </p>
       </div>
     </div>
   </section>

@@ -263,34 +263,6 @@ function observeReveals() {
   document.querySelectorAll('.reveal:not(.visible)').forEach((el) => revealObserver.observe(el));
 }
 
-/* ---------- Animated counters ---------- */
-function animateCounters() {
-  document.querySelectorAll('[data-count]').forEach((el) => {
-    const target = +el.dataset.count;
-    let count = 0;
-    const step = Math.max(1, Math.ceil(target / 40));
-    const tick = () => {
-      count = Math.min(target, count + step);
-      el.textContent = count + (count >= target ? '+' : '');
-      if (count < target) requestAnimationFrame(tick);
-    };
-    tick();
-  });
-}
-
-const aboutSection = document.getElementById('about');
-const counterObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        animateCounters();
-        counterObserver.disconnect();
-      }
-    });
-  },
-  { threshold: 0.4 }
-);
-counterObserver.observe(aboutSection);
 
 /* ---------- Contact form validation ---------- */
 const form = document.getElementById('contactForm');
@@ -545,27 +517,25 @@ function driveShowcase() {
   dots.forEach((d, i) => d.classList.toggle('active', i === active));
 }
 
-/* ---------- Pinned hero: wireframe → clay → render cross-fade ---------- */
+/* ---------- Hello hero: flower card morphs wireframe → clay → render ---------- */
 const heroTrack = document.getElementById('heroTrack');
-const heroLayers = document.querySelectorAll('.hero-layer');
-const heroHint = document.getElementById('heroHint');
-const HERO_STAGES = ['Wireframe', 'Clay Sculpt', 'Final Render'];
+const heroLayers = document.querySelectorAll('.card-layer');
+const cardStage = document.getElementById('cardStage');
+const HERO_STAGES = ['WIREFRAME', 'CLAY SCULPT', 'FINAL RENDER'];
 
 function driveHero() {
   if (!heroTrack || !heroLayers.length) return;
   const total = heroTrack.offsetHeight - window.innerHeight;
-  // Hero starts at document top, so scrollY maps directly to progress.
+  // Hello is the first section, so scrollY maps directly to morph progress.
   const progress = Math.min(1, Math.max(0, window.scrollY / total));
   const pos = progress * (heroLayers.length - 1); // 0 → 2 across the three renders
 
   heroLayers.forEach((layer, i) => {
     const dist = Math.abs(i - pos);
     layer.style.opacity = Math.max(0, 1 - dist); // cross-fade neighbours
-    // Gentle push-in as each stage becomes active.
-    layer.style.transform = `scale(${1.04 - Math.min(0.04, (1 - Math.min(1, dist)) * 0.04)})`;
   });
 
-  if (heroHint) heroHint.textContent = HERO_STAGES[Math.round(pos)];
+  if (cardStage) cardStage.textContent = HERO_STAGES[Math.round(pos)];
 }
 
 /* ---------- Init ---------- */

@@ -153,7 +153,13 @@ ul { list-style: none; }
   --ink: #4a3f2f; --ink-soft: #6f6552; --paper: #fbf3e0; --tape: rgba(197,168,110,0.5);
   background: linear-gradient(160deg, #f6e8c9 0%, #f3dfb6 55%, #efd6a4 100%);
   color: var(--ink); font-family: 'Space Mono', monospace;
-  padding: 110px 0; overflow: hidden;
+  position: relative;
+}
+/* Pinned track: scrolling drives the flower card morph while the frame stays put */
+.hello-track { height: 300vh; }
+.hello-sticky {
+  position: sticky; top: 0; min-height: 100vh; display: flex; align-items: center;
+  padding: 92px 0 40px;
 }
 .hello-grid {
   width: 100%; max-width: 1240px; margin: 0 auto; padding: 0 32px;
@@ -181,10 +187,21 @@ ul { list-style: none; }
 .hello-center { position: relative; aspect-ratio: 5 / 6; min-height: 520px; }
 .flower-card {
   position: absolute; inset: 0; margin: 0 6%;
-  background-color: #fbf3e0; background-size: cover; background-position: center;
-  border-radius: 4px; box-shadow: 0 24px 60px -22px rgba(90,70,30,0.5);
-  transform: rotate(-1deg);
+  background-color: #3d3d3d; border-radius: 4px; overflow: hidden;
+  box-shadow: 0 24px 60px -22px rgba(90,70,30,0.5); transform: rotate(-1deg);
 }
+/* Three stacked renders cross-faded by scroll (wireframe → clay → pink) */
+.card-layer {
+  position: absolute; inset: 0; opacity: 0;
+  background-size: cover; background-position: center; will-change: opacity, transform;
+}
+.card-layer:first-child { opacity: 1; }
+.card-stage {
+  position: absolute; left: 0; right: 0; bottom: 10px; z-index: 2; text-align: center;
+  font-size: 0.62rem; letter-spacing: 3px; color: rgba(255,255,255,0.85);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+}
+.hello-scrollhint { margin-top: 22px; font-size: 0.75rem; letter-spacing: 1px; color: var(--ink-soft); }
 
 /* Polaroids */
 .polaroid {
