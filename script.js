@@ -138,6 +138,7 @@ const skills = [
 const projectsGrid = document.getElementById('projectsGrid');
 
 function renderProjects(filter = 'all') {
+  if (!projectsGrid) return;
   projectsGrid.innerHTML = '';
   const list = filter === 'all' ? projects : projects.filter((p) => p.category === filter);
 
@@ -167,25 +168,30 @@ function renderProjects(filter = 'all') {
 }
 
 /* ---------- Project filters ---------- */
-document.getElementById('filters').addEventListener('click', (e) => {
-  const btn = e.target.closest('.filter-btn');
-  if (!btn) return;
-  document.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderProjects(btn.dataset.filter);
-  if (typeof setupBlur === 'function') setupBlur(); // re-bind blur to the new cards
-});
+const filtersEl = document.getElementById('filters');
+if (filtersEl) {
+  filtersEl.addEventListener('click', (e) => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    document.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderProjects(btn.dataset.filter);
+    if (typeof setupBlur === 'function') setupBlur(); // re-bind blur to the new cards
+  });
+}
 
 /* ---------- Render skills ---------- */
 const skillsGrid = document.getElementById('skillsGrid');
-skills.forEach((s) => {
-  const el = document.createElement('div');
-  el.className = 'skill reveal';
-  el.innerHTML = `
-    <div class="skill-head"><span>${s.name}</span><span>${s.level}%</span></div>
-    <div class="skill-bar"><div class="skill-fill" data-level="${s.level}"></div></div>`;
-  skillsGrid.appendChild(el);
-});
+if (skillsGrid) {
+  skills.forEach((s) => {
+    const el = document.createElement('div');
+    el.className = 'skill reveal';
+    el.innerHTML = `
+      <div class="skill-head"><span>${s.name}</span><span>${s.level}%</span></div>
+      <div class="skill-bar"><div class="skill-fill" data-level="${s.level}"></div></div>`;
+    skillsGrid.appendChild(el);
+  });
+}
 
 /* ---------- Theme toggle ---------- */
 const themeToggle = document.getElementById('themeToggle');
@@ -283,34 +289,39 @@ function validateField(field) {
   return !error;
 }
 
-form.querySelectorAll('input, textarea').forEach((field) => {
-  field.addEventListener('blur', () => validateField(field));
-  field.addEventListener('input', () => {
-    if (field.closest('.form-group').classList.contains('invalid')) validateField(field);
+if (form) {
+  form.querySelectorAll('input, textarea').forEach((field) => {
+    field.addEventListener('blur', () => validateField(field));
+    field.addEventListener('input', () => {
+      if (field.closest('.form-group').classList.contains('invalid')) validateField(field);
+    });
   });
-});
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const fields = [...form.querySelectorAll('input, textarea')];
-  const valid = fields.map(validateField).every(Boolean);
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const fields = [...form.querySelectorAll('input, textarea')];
+    const valid = fields.map(validateField).every(Boolean);
 
-  if (!valid) {
-    formStatus.textContent = 'Please fix the errors above.';
-    formStatus.className = 'form-status';
-    return;
-  }
+    if (!valid) {
+      formStatus.textContent = 'Please fix the errors above.';
+      formStatus.className = 'form-status';
+      return;
+    }
 
-  // No backend here — simulate a successful send.
-  formStatus.textContent = '✓ Thanks! Your message has been sent.';
-  formStatus.className = 'form-status success';
-  form.reset();
-});
+    // No backend here — simulate a successful send.
+    formStatus.textContent = '✓ Thanks! Your message has been sent.';
+    formStatus.className = 'form-status success';
+    form.reset();
+  });
+}
 
 /* ---------- Back to top ---------- */
-document.getElementById('backToTop').addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
+const backToTop = document.getElementById('backToTop');
+if (backToTop) {
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
 
 /* ---------- Smooth scroll + scroll-linked blur ---------- */
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -322,7 +333,7 @@ let lenis = null;
 function initSmoothScroll() {
   if (prefersReducedMotion || !hasLenis) return;
 
-  lenis = new Lenis({ duration: 1.2, smoothWheel: true });
+  lenis = new Lenis({ duration: 1.5, smoothWheel: true, easing: (t) => 1 - Math.pow(1 - t, 3) });
 
   function raf(time) {
     lenis.raf(time);
@@ -422,6 +433,7 @@ const slidesEl = document.getElementById('slides');
 const dotsEl = document.getElementById('showcaseDots');
 
 function renderShowcase() {
+  if (!showcaseTrack) return;
   // Track height: one viewport of scrolling per slide.
   showcaseTrack.style.height = featured.length * 100 + 'vh';
 
